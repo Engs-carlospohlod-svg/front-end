@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Grid Moderno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>Meu Dashboard <span class="logo-icon"></span></h1>
+        </header>
+
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link">Home</a></li>
+                    <li><a href="#" class="nav-link">Perfil</a></li>
+                    <li><a href="#" class="nav-link">Configurações</a></li>
+                    <li><a href="#" class="nav-link">Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <article class="card">
+                <h2>Bem-vindo ao Sistema</h2>
+                <p>Este layout foi construído utilizando CSS Grid. Explore o menu lateral para ver os efeitos de hover!</p>
+            </article>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 - Desenvolvido com Estilo</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+2. CSS (style.css)
+CSS
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Estrutura Grid */
+.container {
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "sidebar content"
+        "footer footer";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 80px 1fr 60px;
+    min-height: 100vh;
+}
+
+/* Áreas do Grid */
+.header { grid-area: header; background-color: #2c3e50; color: white; }
+.sidebar { grid-area: sidebar; background-color: #ecf0f1; border-right: 1px solid #bdc3c7; }
+.content { grid-area: content; background-color: #f9f9f9; padding: 20px; }
+.footer { grid-area: footer; background-color: #34495e; color: white; }
+
+/* Centralização Flexbox dentro do Grid */
+.header, .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 1. Animação no Cabeçalho */
+.header h1 {
+    animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 2. Pseudo-elemento ::after (Ícone Decorativo) */
+.logo-icon::after {
+    content: " 🚀";
+    font-size: 1.2rem;
+}
+
+/* Estilização do Menu */
+.sidebar nav ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.nav-link {
+    display: block;
+    padding: 15px 25px;
+    text-decoration: none;
+    color: #34495e;
+    font-weight: bold;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 3. Destaque ao passar o mouse (Hover) */
+.nav-link:hover {
+    background-color: #3498db;
+    color: white;
+    padding-left: 35px;
+}
+
+/* 4. Pseudo-elemento ::before no Menu */
+.nav-link::before {
+    content: "•";
+    position: absolute;
+    left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+}
+
+/* 5. Animação no Card de Conteúdo */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; scale: 0.9; }
+    to { opacity: 1; scale: 1; }
+}
+
+/* Responsividade simples */
+@media (max-width: 768px) {
+    .container {
+        grid-template-areas: 
+            "header"
+            "content"
+            "sidebar"
+            "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+}
